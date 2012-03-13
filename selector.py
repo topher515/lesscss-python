@@ -30,7 +30,7 @@ from rules    import Rules
 
 SELECTOR = re.compile('''
     (?P<names>
-        [a-z 0-9 \- _ \* \. \s , : # & @]+?
+        [a-z A-Z 0-9 \- _ \* \. \s , : # & @]+?
     )
 
     \s*
