@@ -7,6 +7,7 @@ def read(fname):
 
 
 README = read('README.rst')
+CHANGES = read('CHANGES.rst')
 
 
 setup(
