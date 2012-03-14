@@ -28,7 +28,7 @@ from node import Node
 
 PROPERTY = re.compile('''
     (?P<name>
-        [a-z0-9\-_]+
+        [a-z\*0-9\-_]+
     )
     
     \s*
