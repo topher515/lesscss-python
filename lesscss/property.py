@@ -28,7 +28,7 @@ from lesscss.node import Node
 
 PROPERTY = re.compile('''
     (?P<name>
-        [a-z0-9\-_]+
+        [a-zA-Z0-9\-\*_]+
     )
     
     \s*

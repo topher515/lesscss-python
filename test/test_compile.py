@@ -43,6 +43,24 @@ class TestDocsExamples(unittest.TestCase):
 
 #header { color: @light-blue; }'''), u'#header { color: #6c94be; }')
 
+    def test_camelCase_variables(self):
+        self.assertEqual(compile(u'''
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+
+.hello { color:@grayDark }
+'''),
+        u'.hello { color: #333; }'
+        )
+
+    def test_ie_compatible_asterisk(self):
+        # Allow bullshit IE6/7 hacks
+        self.assertEqual(compile(u'''p { *width: 350px; }'''), 
+          u"""p { *width: 350px; }"""
+        )
+
+
     def test_mixin(self):
         self.assertEqual(compile(u'''.bordered {
   border-top: dotted 1px black;

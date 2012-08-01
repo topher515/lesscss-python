@@ -30,7 +30,7 @@ from lesscss.property import Property
 CONSTANT = re.compile('''
     (?P<name>
         @
-        [a-z0-9\-_]+
+        [a-zA-Z0-9\-_]+
     )
     
     \s*
