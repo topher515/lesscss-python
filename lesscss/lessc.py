@@ -22,15 +22,15 @@ along with lesscss-python.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 
-from accessor import parse_accessor
-from comment  import parse_comment
-from constant import parse_constant
-from importer import parse_import
-from media    import parse_media, Media
-from mixin    import parse_mixin
-from property import parse_property
-from rules    import Rules
-from selector import parse_selector
+from lesscss.accessor import parse_accessor
+from lesscss.comment  import parse_comment
+from lesscss.constant import parse_constant
+from lesscss.importer import parse_import
+from lesscss.media    import parse_media, Media
+from lesscss.mixin    import parse_mixin
+from lesscss.property import parse_property
+from lesscss.rules    import Rules
+from lesscss.selector import parse_selector
 
 
 PARSERS = (parse_accessor,
@@ -151,3 +151,29 @@ def parse(less, parent, path=None):
         
             # report an error with the less code
             raise ValueError('Unable to read onwards from: %s' % less)
+
+
+if __name__ == '__main__':
+    import optparse
+    import sys
+    import traceback
+
+    from lesscss.contrib import console
+
+    usage = "usage: %prog [source [destination]]"
+    parser = optparse.OptionParser(usage=usage)
+    (options, argv) = parser.parse_args()
+
+    def main(argv):
+        source = open(argv[0]) if len(argv) > 0 else sys.stdin
+        destination = argv[1] if len(argv) > 1 else sys.stdout
+        output = console.Writer(destination)
+        output.write(compile(source.read()))
+
+    try:
+        main(argv)
+    except Exception, e:
+        console.Writer(sys.stderr).writeln(
+                traceback.format_exc() if __debug__
+                else str(e))
+        sys.exit(1)
