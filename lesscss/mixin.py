@@ -32,7 +32,7 @@ from lesscss.rules    import Rules
 MIXIN = re.compile('''
     (?P<name>
         \.
-        [a-z 0-9 \- _ \* \s , :]+
+        [a-z A-Z 0-9 \- _ \* \s , :]+
     )
 
     \s*
