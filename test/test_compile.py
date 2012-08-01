@@ -142,12 +142,13 @@ class TestDocsExamples(unittest.TestCase):
 }'''), u'* { width: 6px; }')
 
     def test_namespaces(self):
-        self.assertEqual(compile(u'''#bundle {
-  .button {
+        self.assertEqual(compile(u'''
+#bundle {
+  .button () {
     display: block;
     border: 1px solid black;
     background-color: grey;
-    :hover { background-color: white }
+    &:hover { background-color: white }
   }
   .tab { }
   .citation { }
@@ -156,7 +157,16 @@ class TestDocsExamples(unittest.TestCase):
 #header a {
   color: orange;
   #bundle > .button;
-}'''), u'''''')
+}
+'''), u'''
+#header a {
+  color: orange;  
+  display: block;
+  border: 1px solid black;
+  background-color: grey;
+}
+#header a:hover { background-color: white }
+''')
 
     def test_accessors(self):
         self.assertEqual(compile(u'''#defaults {
